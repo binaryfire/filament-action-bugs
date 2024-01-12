@@ -2,12 +2,14 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\Widget;
+use Livewire\Attributes\On;
 use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Widgets\Widget;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Concerns\InteractsWithActions;
 
 class ActionTooltipTest extends Widget implements HasForms, HasActions
 {
@@ -15,6 +17,12 @@ class ActionTooltipTest extends Widget implements HasForms, HasActions
     use InteractsWithForms;
     
     protected static string $view = 'filament.widgets.action-tooltip-test';
+
+    #[On('open-test-modal')] 
+    public function openTestActionModal(): void
+    {
+        $this->mountAction('testAction');
+    }
 
     public function testAction(): Action
     {
@@ -26,8 +34,7 @@ class ActionTooltipTest extends Widget implements HasForms, HasActions
             ->iconButton()
             ->tooltip('Test tooltip')
             ->extraAttributes([
-                'class' => 'border border-gray-500',
+                'class' => 'invisible',
             ]);
-            
     }
 }

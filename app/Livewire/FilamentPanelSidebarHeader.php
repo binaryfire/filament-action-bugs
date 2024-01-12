@@ -6,10 +6,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Concerns\InteractsWithActions;
 
 class FilamentPanelSidebarHeader extends Component implements HasForms, HasActions
 {
@@ -20,13 +21,12 @@ class FilamentPanelSidebarHeader extends Component implements HasForms, HasActio
     {
         return Action::make('testHeader')
             ->label('Some important action')
-            ->requiresConfirmation()
-            ->modalHeading('Test modal')
             ->action(fn () => null)
+            //->action(fn () => $this->dispatch('open-test-modal'))
             ->extraAttributes([
-                'class' => 'border border-gray-500 w-full',
+                'class' => 'w-full',
+                'x-on:click' => new HtmlString("\$wire.dispatch('open-test-modal')"),
             ]);
-            
     }
 
     public function render()
