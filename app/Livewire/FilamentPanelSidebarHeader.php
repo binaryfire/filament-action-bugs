@@ -23,7 +23,6 @@ class FilamentPanelSidebarHeader extends Component implements HasForms, HasActio
             ->requiresConfirmation()
             ->modalHeading('Test modal')
             ->action(fn () => null)
-            ->tooltip('Test header action')
             ->extraAttributes([
                 'class' => 'border border-gray-500 w-full',
             ]);
