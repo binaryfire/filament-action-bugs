@@ -30,6 +30,11 @@ class AdminPanelProvider extends PanelProvider
         FilamentView::registerRenderHook(
             'panels::sidebar.footer',
             fn (): string => Blade::render('@livewire(\'filament-panel-sidebar-footer\')'),
+        );
+
+        FilamentView::registerRenderHook(
+            'panels::sidebar.nav.start',
+            fn (): string => Blade::render('@livewire(\'filament-panel-sidebar-header\')'),
         );        
     }
 
